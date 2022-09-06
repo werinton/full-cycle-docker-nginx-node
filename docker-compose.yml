@@ -21,7 +21,6 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     networks:
       - node-net-rocks
-
   
   app:
     build: node
@@ -33,11 +32,17 @@ services:
     networks:
       - node-net-rocks
     tty: true 
-    ports:
-      - "3000:3000"
 
-#mysql -uroot -proot
-#&& 
-#              mysql -uroot -proot
-#              && use nodedb;
-#              && source /usr/temp/create_tables.sql
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: dockerfile.prod
+    image: werinton/nginx:prod
+    container_name: nginx
+    depends_on:
+      - app
+    restart: always
+    networks:
+      - node-net-rocks
+    ports:
+      - "8080:80"
