@@ -27,6 +27,7 @@ services:
     container_name: app
     entrypoint: dockerize -wait tcp://mysql:3306 -timeout 20s docker-entrypoint.sh
     command: ["node", "index.js"]
+    restart: always
     depends_on:
       - mysql
     networks:
