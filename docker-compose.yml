@@ -15,8 +15,14 @@ services:
     tty: true
     volumes:
       - ./db_data/:/var/lib/mysql
+      - ./db_dump/:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
     networks:
       - node-net-rocks
+#mysql -uroot -proot
+#&& 
+#              mysql -uroot -proot
+#              && use nodedb;
+#              && source /usr/temp/create_tables.sql
