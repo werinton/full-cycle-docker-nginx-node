@@ -23,7 +23,7 @@ services:
       - node-net-rocks
   
   app:
-    build: node
+    image: werinton/node-full-cycle-rocks
     container_name: app
     entrypoint: dockerize -wait tcp://mysql:3306 -timeout 20s docker-entrypoint.sh
     command: ["node", "index.js"]
