@@ -27,13 +27,15 @@ services:
       context: ./node
     container_name: app
     entrypoint: dockerize -wait tcp://mysql:3306 -timeout 20s docker-entrypoint.sh
-    command: ["node", "index.js"]
+    command: bash -c "npm install && node index.js"
     restart: always
     depends_on:
       - mysql
     networks:
       - node-net-rocks
     tty: true 
+    volumes:
+      - ./node/:/usr/src/app
 
   nginx:
     build: 
